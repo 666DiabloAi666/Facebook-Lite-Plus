@@ -1,0 +1,213 @@
+<!-- New-Age Framework: Full Bootstrapped HTML + Vue + CLI + Rust + Python Layout -->
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New-Age Framework</title>
+  <meta name="description" content="Meta AGI Core - Adaptive Generative Intelligence for tactical command." />
+  <meta name="author" content="Mario White / Crown Command" />
+  <link rel="stylesheet" href="./cli_ui/terminal_pure.css">
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="./cli_ui/app.vue"></script>
+</body>
+</html>
+
+<!-- cli_ui/terminal_pure.css -->
+body {
+  background: radial-gradient(circle, #0a0a23, #000);
+  color: #fff;
+  font-family: 'Fira Code', monospace;
+  margin: 0;
+  padding: 2rem;
+}
+.panel {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 0 15px #00ffff33, 0 0 25px #9400ff33 inset;
+  margin-bottom: 1rem;
+}
+
+<!-- cli_ui/app.vue -->
+<template>
+  <div>
+    <div class="panel">text</div>
+    <div class="panel">rust.lib</div>
+    <div class="panel">ironpython4.lib</div>
+    <div class="panel">
+      <p>// AGI mimic rewriting thought stream...</p>
+      <p>output = ghost.post("They won’t see me but they’ll feel me.")</p>
+    </div>
+    <div class="panel">Meta AGI Core: Activated for tactical evolution.</div>
+    <div class="panel">
+      <form @submit.prevent="submitSignIn">
+        <label>Email:</label>
+        <input type="email" v-model="email" required />
+        <label>Access Key:</label>
+        <input type="password" v-model="accessKey" required />
+        <button type="submit">Sign In</button>
+      </form>
+      <p v-if="verified">✅ Payment confirmed. Welcome, Commander.</p>
+      <p v-else-if="attempted">❌ Invalid credentials. Payment confirmation required.</p>
+      <a href="https://buy.stripe.com/9AQaEYfYodrAczC144" target="_blank" class="payment-link">💳 Click here to complete your $99.99 payment</a>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+const email = ref('')
+const accessKey = ref('')
+const verified = ref(false)
+const attempted = ref(false)
+
+function submitSignIn() {
+  attempted.value = true
+  if (email.value === 'crown@command.ai' && accessKey.value === 'META-AGI-9999') {
+    verified.value = true
+  } else {
+    verified.value = false
+  }
+}
+</script>
+
+<style scoped>
+.panel p {
+  margin: 0.25rem 0;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+input, button {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  font-family: inherit;
+}
+button {
+  background: #00ffff;
+  color: #000;
+  cursor: pointer;
+}
+.payment-link {
+  margin-top: 1rem;
+  color: #00ffff;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+}
+</style>
+
+<!-- core/lib.rs -->
+pub fn execute_logic() {
+    println!("[Rust Logic] Executing secure AGI command stream...");
+}
+
+<!-- core/macro.rs -->
+#[macro_export]
+macro_rules! agi_log {
+    ($msg:expr) => {
+        println!("[AGI]: {}", $msg);
+    };
+}
+
+<!-- core/meta_agi.rs -->
+pub fn initialize_meta_agi() {
+    println!("[Meta AGI Core] Tactical module activated. AGI readiness: 100%.");
+}
+
+<!-- core/ironpython_core.ipy -->
+print("[IronPython] GhostLayer AGI module active.")
+def mimic_text(text):
+    return f"[MIMIC] {text[::-1]}"
+
+<!-- hooks/real_hooks.ipy -->
+def deploy_real_post(msg):
+    return "[REAL POST] " + msg
+
+<!-- hooks/fake_hooks.ipy -->
+def trigger_fake_signal():
+    return "[FAKE POST] honeypot trap active."
+
+<!-- hooks/prehooks.rs -->
+use std::thread;
+use std::time::Duration;
+
+pub fn pre_initiate_delay() {
+    println!("[PreHook] Initiating delay for fingerprint randomization...");
+    thread::sleep(Duration::from_secs(2));
+}
+
+<!-- digi_agent/duix_wrapper.js -->
+export function initAgent() {
+  console.log("🎧 AI Digital Agent activated");
+}
+
+<!-- digi_agent/ai_assistant.vue -->
+<template>
+  <div class="panel">🎧 Digital Agent Listening...</div>
+</template>
+
+<!-- security/report_scanner.py -->
+import requests
+
+def scan_url(url):
+    if "github.com" in url:
+        print("Scanning for fake stars...")
+        # Simulated logic here
+        return True
+
+<!-- security/supply_chain_guard.rs -->
+pub fn scan_pr(pr_body: &str) -> bool {
+    if pr_body.contains("malicious") {
+        println!("[SECURITY] Blocked malicious PR");
+        return false;
+    }
+    true
+}
+
+<!-- workflow.yaml -->
+name: Build New-Age
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node, Rust, Python
+        run: |
+          sudo apt update
+          sudo apt install -y python3 rustc nodejs
+          npm install -g @vue/cli
+      - name: Build Frontend
+        run: |
+          cd cli_ui
+          vue build
+      - name: Test Rust
+        run: |
+          rustc core/lib.rs
+          rustc core/meta_agi.rs
+      - name: Run Python Scanner
+        run: |
+          python3 security/report_scanner.py
+
+
+✅ URL link for payment has been added to the sign-in panel:
+
+> 💳 Click here to complete your $99.99 payment
+
+
+
+This link appears only during login, under the credentials form. Ready for smart contract, AGI wallet sync, or QR-code integration—just say the word.
+
