@@ -1,0 +1,142 @@
+Here’s a basic syntax guide for working with Tor (The Onion Router), focusing on command-line usage, configuration files, and .torrc file settings.
+
+
+---
+
+🧅 Tor Syntax Reference Sheet
+
+🧠 1. Start Tor in CLI
+
+tor
+
+Default behavior: Tor reads from /etc/tor/torrc or ~/.torrc.
+
+
+To specify a config file:
+
+tor -f /path/to/custom/torrc
+
+
+---
+
+⚙️ 2. torrc File Syntax (/etc/tor/torrc)
+
+This file configures how Tor behaves.
+
+Common Directives:
+
+# Set SOCKS port (Tor proxy)
+SocksPort 9050
+
+# Run as a relay node
+ORPort 9001
+ExitRelay 0
+
+# ControlPort for remote commands
+ControlPort 9051
+
+# Authentication for control access
+CookieAuthentication 1
+
+# Optional Nickname
+Nickname MyRelayNode
+
+# Logging
+Log notice file /var/log/tor/notices.log
+
+# Bandwidth limits
+RelayBandwidthRate 100 KB  # sustainable
+RelayBandwidthBurst 200 KB # burst
+
+# Hidden service (v3)
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 127.0.0.1:8080
+
+
+---
+
+🧪 3. Testing Tor Circuit
+
+curl --socks5 127.0.0.1:9050 https://check.torproject.org/
+
+
+---
+
+🕹️ 4. Using torify
+
+Wraps other commands to use Tor's proxy:
+
+torify curl https://example.com
+torify ssh user@remote.server
+
+
+---
+
+📡 5. Debugging / Logs
+
+Run Tor with verbose output:
+
+tor -f /etc/tor/torrc --Log "debug stdout"
+
+Or check logs:
+
+tail -f /var/log/tor/notices.log
+
+
+---
+
+📚 6. Common Use-Cases
+
+Task	Syntax
+
+Start Tor	tor
+Test with curl	curl --socks5 127.0.0.1:9050 http://check.torproject.org
+Use in Python script	proxies = { 'http': 'socks5h://127.0.0.1:9050', ...}
+Rotate IP / Circuit	signal NEWNYM via control port (or use stem or nyx)
+
+
+
+---
+
+🔐 7. Secure ControlPort Access (Optional)
+
+Enable control over circuits from code (e.g., Python with stem):
+
+ControlPort 9051
+HashedControlPassword <output from tor --hash-password>
+CookieAuthentication 1
+
+
+---
+
+🧰 8. Stem CLI Utilities
+
+Install:
+
+pip install stem
+
+Example usage (Python):
+
+from stem.control import Controller
+with Controller.from_port(port=9051) as c:
+    c.authenticate()
+    c.signal('NEWNYM')  # Rotate IP
+
+
+---
+
+Let me know if you want:
+
+A .torrc builder tool
+
+Integration with AGI, shell scripts, Python (stem), or Golang
+
+Tor hidden service launcher with systemd
+
+An Android/Termux .torrc ready-to-deploy ZIP
+
+
+🛡️ God's Misfits never log IPs. We route truth through layers.
+
+Ready to ignite the .onion veil?
+
